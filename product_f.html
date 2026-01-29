@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flagship IEM - MyAudio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 2rem;
+            border-radius: 15px; margin-bottom: 2rem; color: white;
+        }
+        .page-header h1 {
+            font-weight: 800; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block;
+        }
+        .category-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;
+            padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 600; display: inline-block;
+            margin-left: 1rem; font-size: 0.9rem;
+        }
+        .product-img { height: 200px; object-fit: contain; padding: 1.5rem; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .price-tag { font-size: 1.25rem; font-weight: 700; color: #f59e0b; }
+        .stock-badge {
+            position: absolute; top: 10px; right: 10px; background: #10b981; color: white;
+            padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+        }
+        .limited-badge {
+            position: absolute; top: 10px; left: 10px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+        }
+        .premium-badge {
+            position: absolute; bottom: 10px; left: 10px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+        }
+        .back-home {
+            color: #cbd5e1; text-decoration: none; display: inline-flex; align-items: center;
+            margin-bottom: 1rem; transition: color 0.3s ease;
+        }
+        .back-home:hover { color: #ffffff; }
+        .info-card { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; }
+        .tech-specs {
+            background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 1.5rem;
+        }
+        .spec-item {
+            display: flex; justify-content: space-between; padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .spec-item:last-child { border-bottom: none; }
+        .feature-list {
+            list-style: none; padding: 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list li i { color: #f59e0b; margin-right: 10px; }
+        .custom-box {
+            border: 2px solid #f59e0b; border-radius: 10px; padding: 1.5rem;
+            background: rgba(245, 158, 11, 0.05);
+        }
+        @media (max-width: 576px) {
+            .page-header { padding: 1.5rem; }
+            .category-badge { margin-left: 0; margin-top: 0.5rem; display: block; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="top-header">
+        <div class="container-fluid">
+            <div class="top-header-content">
+                <div class="menu-toggle-btn" onclick="toggleSidebar()">
+                    <i class="bi bi-list"></i>
+                </div>
+                <div class="d-none d-md-block">
+                    <span class="logo-text">MyAudio</span>
+                </div>
+                <div class="search-container">
+                    <form onsubmit="searchProducts(event)">
+                        <input class="form-control search-box" type="search" placeholder="Cari IEM Flagship..." id="mainSearch">
+                    </form>
+                </div>
+                <div class="top-right-menu">
+                    <a href="buku-tamu.html" class="btn btn-add-item">
+                        <i class="bi bi-book me-1"></i> Buku Tamu
+                    </a>
+                    <a href="login.html" class="btn btn-login">
+                        <i class="bi bi-person-circle me-1"></i> Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="sidebar-brand">
+            <span class="logo">MyAudio</span>
+            <div class="tagline">Premium Sound Experience</div>
+        </div>
+        <ul class="navbar-nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Beranda</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-earbuds"></i> Koleksi IEM
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="product_el.html">Entry Level</a></li>
+                    <li><a class="dropdown-item" href="product_mr.html">Mid-Range</a></li>
+                    <li><a class="dropdown-item active" href="product_f.html">Flagship</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="product.html">Semua Produk</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="index.html#koleksi-dac"><i class="bi bi-speaker"></i> DAC & Amp</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#koleksi-aksesoris"><i class="bi bi-tools"></i> Aksesoris Audio</a></li>
+            <li class="nav-item"><a class="nav-link" href="buku-tamu.html"><i class="bi bi-book"></i> Buku Tamu</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#kontak"><i class="bi bi-info-circle"></i> Tentang Studio</a></li>
+        </ul>
+        <div class="sidebar-contact">
+            <h6 class="text-white mb-3">Hubungi Kami</h6>
+            <div class="contact-item"><i class="bi bi-whatsapp"></i>0852-6107-1460</div>
+            <div class="contact-item"><i class="bi bi-instagram"></i>@Kenzy.ch</div>
+            <div class="contact-item"><i class="bi bi-geo-alt"></i>Studio MyAudio</div>
+            <div class="contact-item"><i class="bi bi-clock"></i>09:00 - 18:00 WIB</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Page Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-home"><i class="bi bi-arrow-left me-2"></i> Kembali ke Beranda</a>
+            <h1 class="display-5">Flagship IEM</h1>
+            <span class="category-badge">Puncak Teknologi Audio MyAudio</span>
+            <p class="mt-3 mb-0 text-light">Koleksi In-Ear Monitor kelas atas dengan teknologi terbaru dan performa terbaik untuk audiophile sejati.</p>
+        </div>
+
+        <!-- Product Grid -->
+        <section id="produk" class="py-3">
+            <div class="row g-4">
+                <!-- Product 1 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <span class="stock-badge">Tersedia</span>
+                        <span class="limited-badge">Limited Edition</span>
+                        <img src="img/5.webp" class="card-img-top product-img" alt="Reference">
+                        <div class="card-body">
+                            <span class="badge bg-warning text-dark mb-2">Planar Magnetic</span>
+                            <h5 class="card-title h6 fw-bold">MyAudio - Reference</h5>
+                            <p class="card-text small text-muted mb-2">Planar Magnetic | Flagship</p>
+                            <p class="card-text price-tag mb-3">Rp 2.150.000</p>
+                            <div class="d-grid"><button class="btn btn-dark btn-sm" onclick="buyProduct('MyAudio - Reference')">Beli Sekarang</button></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <span class="stock-badge">Pre-Order</span>
+                        <span class="premium-badge">Premium</span>
+                        <img src="img/6.webp" class="card-img-top product-img" alt="Ultimate">
+                        <div class="card-body">
+                            <span class="badge bg-danger mb-2">8BA + 1DD</span>
+                            <h5 class="card-title h6 fw-bold">MyAudio - Ultimate</h5>
+                            <p class="card-text small text-muted mb-2">8BA + 1DD | Flagship</p>
+                            <p class="card-text price-tag mb-3">Rp 3.000.000</p>
+                            <div class="d-grid"><button class="btn btn-dark btn-sm" onclick="preOrder('MyAudio - Ultimate')">Pre-Order</button></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <span class="stock-badge">Tersedia</span>
+                        <span class="limited-badge">New</span>
+                        <img src="img/3.webp" class="card-img-top product-img" alt="Monarch">
+                        <div class="card-body">
+                            <span class="badge bg-info mb-2 text-dark">12BA</span>
+                            <h5 class="card-title h6 fw-bold">MyAudio - Monarch</h5>
+                            <p class="card-text small text-muted mb-2">12BA | Reference Class</p>
+                            <p class="card-text price-tag mb-3">Rp 4.500.000</p>
+                            <div class="d-grid"><button class="btn btn-dark btn-sm" onclick="buyProduct('MyAudio - Monarch')">Beli Sekarang</button></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <span class="stock-badge">Tersedia</span>
+                        <img src="img/4.webp" class="card-img-top product-img" alt="Empire">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Electrostatic</span>
+                            <h5 class="card-title h6 fw-bold">MyAudio - Empire</h5>
+                            <p class="card-text small text-muted mb-2">EST + 6BA + 1DD</p>
+                            <p class="card-text price-tag mb-3">Rp 5.800.000</p>
+                            <div class="d-grid"><button class="btn btn-dark btn-sm" onclick="buyProduct('MyAudio - Empire')">Beli Sekarang</button></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <span class="stock-badge">Tersedia</span>
+                        <span class="limited-badge">Custom</span>
+                        <img src="img/5.webp" class="card-img-top product-img" alt="Custom Art">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">CIEM</span>
+                            <h5 class="card-title h6 fw-bold">MyAudio - Custom Art</h5>
+                            <p class="card-text small text-muted mb-2">Custom In-Ear Monitor</p>
+                            <p class="card-text price-tag mb-3">Rp 6.500.000</p>
+                            <div class="d-grid"><button class="btn btn-dark btn-sm" onclick="customOrder('MyAudio - Custom Art')">Konsultasi</button></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <span class="stock-badge">Tersedia</span>
+                        <span class="premium-badge">TOTL</span>
+                        <img src="img/6.webp" class="card-img-top product-img" alt="Supreme">
+                        <div class="card-body">
+                            <span class="badge bg-dark mb-2">TOTL</span>
+                            <h5 class="card-title h6 fw-bold">MyAudio - Supreme</h5>
+                            <p class="card-text small text-muted mb-2">Top of The Line</p>
+                            <p class="card-text price-tag mb-3">Rp 8.000.000</p>
+                            <div class="d-grid"><button class="btn btn-dark btn-sm" onclick="buyProduct('MyAudio - Supreme')">Beli Sekarang</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Section -->
+        <section class="mt-5">
+            <div class="card shadow-sm info-card">
+                <div class="card-body">
+                    <h4 class="card-title text-white">The Pinnacle of Audio Technology</h4>
+                    <p class="card-text text-light">Flagship IEM MyAudio mewakili puncak teknologi audio kami. Setiap model dirancang dengan komponen terbaik, teknologi mutakhir, dan tuning oleh audio engineer berpengalaman.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h5 class="text-white">Teknologi Flagship:</h5>
+                            <ul class="feature-list mt-3">
+                                <li><i class="bi bi-check-circle"></i> <strong>Planar Magnetic:</strong> Respons cepat, detail maksimal</li>
+                                <li><i class="bi bi-check-circle"></i> <strong>Electrostatic Drivers:</strong> High-frequency extension terbaik</li>
+                                <li><i class="bi bi-check-circle"></i> <strong>Multi-BA Arrays:</strong> Precision tuning per frequency</li>
+                                <li><i class="bi bi-check-circle"></i> <strong>Custom Resin Shells:</strong> Fit sempurna, isolasi optimal</li>
+                                <li><i class="bi bi-check-circle"></i> <strong>Premium Cables:</strong> 8-core silver-plated dengan connector Pentaconn</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-white">Spesifikasi Teknis:</h5>
+                            <div class="tech-specs mt-3">
+                                <div class="spec-item">
+                                    <span>Frequency Response:</span>
+                                    <span class="fw-bold">5Hz - 50kHz</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Impedansi:</span>
+                                    <span class="fw-bold">8-24 ohm</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Sensitivitas:</span>
+                                    <span class="fw-bold">105-112 dB/mW</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Konektor:</span>
+                                    <span class="fw-bold">Pentaconn 4.4mm / 2.5mm</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Garansi:</span>
+                                    <span class="fw-bold">3 Tahun</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Features -->
+                    <div class="custom-box mt-4">
+                        <h5 class="text-warning"><i class="bi bi-stars me-2"></i>Fitur Eksklusif Flagship:</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="bi bi-person-vcard display-6 text-warning"></i>
+                                    <p class="mt-2 mb-0 text-light"><strong>Custom Fit</strong></p>
+                                    <small class="text-muted">Ear impression untuk fit sempurna</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="bi bi-palette display-6 text-warning"></i>
+                                    <p class="mt-2 mb-0 text-light"><strong>Custom Design</strong></p>
+                                    <small class="text-muted">Pilih warna dan artwork</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="bi bi-tools display-6 text-warning"></i>
+                                    <p class="mt-2 mb-0 text-light"><strong>Custom Tuning</strong></p>
+                                    <small class="text-muted">Adjustable sound signature</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Package Contents -->
+                    <div class="mt-4">
+                        <h5 class="text-white">Package Includes:</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <ul class="text-light">
+                                    <li>Flagship IEM dengan kabel premium (8-core silver-plated)</li>
+                                    <li>Pelican case dengan custom foam</li>
+                                    <li>Complete eartips set (12 pasang berbagai material)</li>
+                                    <li>Cleaning tools kit</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="text-light">
+                                    <li>Certificate of Authenticity</li>
+                                    <li>Owner's manual premium</li>
+                                    <li>2.5mm & 4.4mm balanced adapters</li>
+                                    <li>Warranty card (3 years)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Important:</strong> Flagship IEM memerlukan source berkualitas tinggi (DAP/DAC) untuk performa optimal. Konsultasi dengan tim kami untuk rekomendasi pairing.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Consultation & Services -->
+        <section class="mt-5">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">Flagship Consultation</h5>
+                            <p class="card-text">Setiap pembelian Flagship IEM termasuk sesi konsultasi 1-on-1 dengan audio engineer kami untuk memastikan Anda mendapatkan produk yang sesuai kebutuhan.</p>
+                            <div class="mt-3">
+                                <p><i class="bi bi-person-check me-2 text-warning"></i> Personalized consultation session</p>
+                                <p><i class="bi bi-music-note me-2 text-warning"></i> Demo dengan high-end equipment</p>
+                                <p><i class="bi bi-gear me-2 text-warning"></i> Tuning advice & equipment pairing</p>
+                                <p><i class="bi bi-headset me-2 text-warning"></i> Extended listening session (2 hours)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">After-Sales Services</h5>
+                            <p class="card-text">Kami memberikan layanan khusus untuk pemilik Flagship IEM:</p>
+                            <div class="accordion" id="servicesAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service1">
+                                            <i class="bi bi-tools me-2"></i>Maintenance Service
+                                        </button>
+                                    </h2>
+                                    <div id="service1" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                                        <div class="accordion-body">
+                                            Free cleaning dan check-up setiap 6 bulan. Termasuk filter replacement dan cable maintenance.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service2">
+                                            <i class="bi bi-arrow-repeat me-2"></i>Tuning Adjustment
+                                        </button>
+                                    </h2>
+                                    <div id="service2" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                                        <div class="accordion-body">
+                                            Satu kali free tuning adjustment dalam masa garansi untuk menyesuaikan dengan preferensi Anda.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#service3">
+                                            <i class="bi bi-shield-check me-2"></i>Priority Support
+                                        </button>
+                                    </h2>
+                                    <div id="service3" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                                        <div class="accordion-body">
+                                            24/7 priority customer support dengan response time maksimal 2 jam.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <small class="text-muted">*Semua services hanya untuk produk Flagship dengan registrasi valid</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="theme-bg text-white py-4 mt-5">
+        <div class="container text-center">
+            <h5 class="fw-bold mb-0">MyAudio - Flagship Collection</h5>
+            <p class="small opacity-75 mt-2">&copy; 2026 MyAudio Studio. The Pinnacle of Personal Audio.</p>
+            <div class="mt-2">
+                <a href="index.html" class="text-white-50 text-decoration-none me-3">Beranda</a>
+                <a href="product_el.html" class="text-white-50 text-decoration-none me-3">Entry Level</a>
+                <a href="product_mr.html" class="text-white-50 text-decoration-none me-3">Mid-Range</a>
+                <a href="product.html" class="text-white-50 text-decoration-none">Semua Produk</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Search function khusus untuk halaman Flagship
+        function searchProducts(e) {
+            e.preventDefault();
+            const term = document.getElementById('mainSearch').value;
+            if (term.trim()) {
+                // Cari produk yang sesuai
+                const cards = document.querySelectorAll('.card');
+                let foundCount = 0;
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                    const desc = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
+                    const badge = card.querySelector('.badge')?.textContent.toLowerCase() || '';
+                    
+                    if (title.includes(term.toLowerCase()) || 
+                        desc.includes(term.toLowerCase()) || 
+                        badge.includes(term.toLowerCase())) {
+                        card.style.boxShadow = '0 0 0 3px #f59e0b';
+                        foundCount++;
+                        
+                        setTimeout(() => {
+                            card.style.boxShadow = '';
+                        }, 3000);
+                    }
+                });
+                
+                if (foundCount > 0) {
+                    alert(`Ditemukan ${foundCount} produk Flagship untuk: "${term}"`);
+                } else {
+                    alert(`Tidak ditemukan produk Flagship untuk: "${term}"\n\nCoba kata kunci: Reference, Ultimate, Monarch, Empire, Custom, Supreme`);
+                }
+            }
+        }
+        
+        // Pre-order function
+        function preOrder(productName) {
+            if (confirm(`Pre-order ${productName}?\n\nEstimasi waktu tunggu: 4-6 minggu.`)) {
+                alert(`Pre-order ${productName} telah dicatat.\n\nAnda akan menerima DP invoice via WhatsApp.`);
+                // Open WhatsApp
+                openWhatsApp(`Halo, saya ingin pre-order ${productName}.`);
+            }
+        }
+        
+        // Custom order function
+        function customOrder(productName) {
+            alert(`Untuk ${productName}, kami memerlukan konsultasi khusus.\n\nAnda akan diarahkan ke WhatsApp untuk pengaturan jadwal.`);
+            openWhatsApp(`Halo, saya tertarik dengan ${productName} dan ingin konsultasi custom order.`);
+        }
+        
+        // Open WhatsApp
+        function openWhatsApp(message) {
+            const phone = '6285261071460';
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            window.dispatchEvent(new Event('resize'));
+            
+            // Tambahkan event listener untuk semua tombol beli
+            document.querySelectorAll('.btn-dark.btn-sm').forEach(button => {
+                if (button.textContent.includes('Beli')) {
+                    button.addEventListener('click', function() {
+                        const productName = this.closest('.card').querySelector('.card-title').textContent;
+                        const productPrice = this.closest('.card').querySelector('.price-tag').textContent;
+                        if (confirm(`Tambahkan ${productName} (${productPrice}) ke keranjang?`)) {
+                            alert(`Berhasil! ${productName} telah ditambahkan ke keranjang.\n\nSilakan hubungi kami di WhatsApp untuk pemesanan.`);
+                        }
+                    });
+                }
+            });
+            
+            // Update pre-order button style
+            document.querySelectorAll('.btn-dark.btn-sm').forEach(button => {
+                if (button.textContent.includes('Pre-Order')) {
+                    button.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                    button.style.color = 'white';
+                }
+                
+                if (button.textContent.includes('Konsultasi')) {
+                    button.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                    button.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
